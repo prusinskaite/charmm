@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<VBox  prefWidth="1000" prefHeight="700"  xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER"
+      stylesheets="/css/login.css" xmlns="http://javafx.com/javafx/8.0.172-ea"
+      fx:controller="controllers.GraphsController" styleClass="root">
+    <Button fx:id="back" onAction="#goBack" styleClass="back" text="%login.back"/>
+    <Label fx:id="patientLabel" styleClass="bigLabel"/>
+    <HBox alignment="TOP_CENTER">
+        <ToggleButton fx:id="temp" minWidth="100.0" onAction="#displayTemperature" prefWidth="100.0" text="Temperature">
+            <HBox.margin>
+                <Insets left="10.0" right="10.0"/>
+            </HBox.margin>
+        </ToggleButton>
+        <ToggleButton fx:id="mf" minWidth="100.0" onAction="#displayMassFlow" prefWidth="100.0" text="Mass Flow">
+            <HBox.margin>
+                <Insets left="10.0" right="10.0"/>
+            </HBox.margin>
+        </ToggleButton>
+        <ToggleButton fx:id="rho" minWidth="100.0" onAction="#displayDensity" prefWidth="100.0" text="Density">
+            <HBox.margin>
+                <Insets left="10.0" right="10.0"/>
+            </HBox.margin>
+        </ToggleButton>
+        <ToggleButton fx:id="dp" minWidth="100.0" onAction="#displayPressure" prefWidth="100.0" text="Pressure">
+            <HBox.margin>
+                <Insets left="10.0" right="10.0"/>
+            </HBox.margin>
+        </ToggleButton>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </padding>
+    </HBox>
+    <ImageView fx:id="graph" fitHeight="500"  pickOnBounds="true">
+        <image>
+            <Image requestedHeight="500" url="@../graphs/Temp.jpeg"/>
+        </image>
+    </ImageView>
+</VBox>

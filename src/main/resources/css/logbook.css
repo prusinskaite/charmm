@@ -1,0 +1,71 @@
+.a{
+    -fx-text-fill: white;
+    -fx-background-color: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+
+    -fx-border-width: 1;
+    -fx-border-color: gray;
+}
+
+.root{
+    -fx-background-color: white;
+}
+.value{
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+}
+.text-area{
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-box-border: transparent;
+    -fx-effect: innershadow(one-pass-box,transparent,5,0.3,1,1);
+}
+.text-area:focused{
+    -fx-focus-color: #ff442e;
+}
+
+.down {
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-min-height: 70px;
+    -fx-min-width: 70px;
+    -fx-background-image: url("img/chevron-down.png");
+    -fx-background-size: 70px 70px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+}
+
+.apply {
+    -fx-text-fill: white;
+    -fx-background-color: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}
+.text-field:focused{
+    -fx-focus-color: transparent;
+}
+.text-field{
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+
+    -fx-text-box-border: transparent;
+
+}
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow( gaussian , rgba(69, 69, 69, 0.1), 10,0.5,0.0,0.0 );
+}
+.execute {
+    -fx-text-fill: white;
+    -fx-background-color: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}

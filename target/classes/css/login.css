@@ -1,0 +1,152 @@
+.button {
+    -fx-text-fill: white;
+    -fx-background-color: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}
+.root{
+    -fx-background-color: white;
+}
+.back{
+    -fx-background-color: white;
+    -fx-text-fill: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}
+.toggle-button{
+    -fx-text-fill: white;
+    -fx-background-color: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}
+.toggle-button:selected{
+    -fx-text-fill: black;
+    -fx-background-color: gray;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}
+.bigLabel {
+    -fx-font-size: 40;
+}
+
+.normalLabel {
+    -fx-font-size: 14;
+}
+
+.errorLabel {
+    -fx-text-fill: #ff442e;
+    -fx-font-size: 14;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.text-field {
+    -fx-text-fill: #b4b4b4;
+    -fx-font-size: 14;
+}
+
+.devLabel {
+
+}
+
+.error {
+    -fx-text-fill: red;
+}
+
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0.0, 0.0);
+}
+
+.pane {
+    -fx-background-color: white;
+}
+
+.usrn {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-background-image: url("../images/account.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-text-box-border: transparent;
+    -fx-effect: innershadow(one-pass-box, transparent, 5, 0.3, 1, 1);
+}
+
+.text-field:focused {
+    -fx-focus-color: transparent;
+}
+
+.pswd {
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-image: url("../images/lock.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-text-box-border: transparent;
+}
+
+.select {
+
+}
+
+.methodPassword {
+    -fx-background-image: url("../images/login.png");
+    -fx-background-size: cover, auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-box-border: transparent;
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+}
+
+.methodFingerprint {
+    -fx-background-image: url("../images/fingerprints.png");
+    -fx-background-size: cover, auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-box-border: transparent;
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+}
+
+.methodCard {
+    -fx-background-image: url("../images/id-card1.png");
+    -fx-background-size: cover, auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-box-border: transparent;
+    -fx-border-width: 1;
+    -fx-border-color: #e4e4e4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+}
+
+.devLabel {
+    -fx-font-size: 18;
+    -fx-text-fill: #ff442e;
+}

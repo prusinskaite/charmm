@@ -1,0 +1,37 @@
+.button {
+    -fx-text-fill: white;
+    -fx-background-color: #ff442e;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}
+
+.text-field {
+
+}
+
+.error {
+    -fx-text-fill: red;
+}
+
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0.0, 0.0);
+}
+
+.pane {
+    -fx-background-color: white;
+}
+
+.text-field:focused {
+    -fx-focus-color: transparent;
+}
+
+.select {
+
+}
+
+.devLabel {
+    -fx-font-size: 18;
+    -fx-text-fill: #ff442e;
+}
