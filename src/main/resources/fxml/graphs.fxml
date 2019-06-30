@@ -11,22 +11,22 @@
     <Button fx:id="back" onAction="#goBack" styleClass="back" text="%login.back"/>
     <Label fx:id="patientLabel" styleClass="bigLabel"/>
     <HBox alignment="TOP_CENTER">
-        <ToggleButton fx:id="temp" minWidth="100.0" onAction="#displayTemperature" prefWidth="100.0" text="Temperature">
+        <ToggleButton fx:id="temp" minWidth="100.0" onAction="#displayTemperature" prefWidth="100.0" text="%graphs.temperature">
             <HBox.margin>
                 <Insets left="10.0" right="10.0"/>
             </HBox.margin>
         </ToggleButton>
-        <ToggleButton fx:id="mf" minWidth="100.0" onAction="#displayMassFlow" prefWidth="100.0" text="Mass Flow">
+        <ToggleButton fx:id="mf" minWidth="100.0" onAction="#displayMassFlow" prefWidth="100.0" text="%graphs.massFlow">
             <HBox.margin>
                 <Insets left="10.0" right="10.0"/>
             </HBox.margin>
         </ToggleButton>
-        <ToggleButton fx:id="rho" minWidth="100.0" onAction="#displayDensity" prefWidth="100.0" text="Density">
+        <ToggleButton fx:id="rho" minWidth="100.0" onAction="#displayDensity" prefWidth="100.0" text="%graphs.density">
             <HBox.margin>
                 <Insets left="10.0" right="10.0"/>
             </HBox.margin>
         </ToggleButton>
-        <ToggleButton fx:id="dp" minWidth="100.0" onAction="#displayPressure" prefWidth="100.0" text="Pressure">
+        <ToggleButton fx:id="dp" minWidth="100.0" onAction="#displayPressure" prefWidth="100.0" text="%graphs.pressure">
             <HBox.margin>
                 <Insets left="10.0" right="10.0"/>
             </HBox.margin>

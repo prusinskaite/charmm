@@ -12,7 +12,6 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import support.FXRouter;
 import support.Selection;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -20,23 +19,38 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class HomeController {
+    /**
+     * The container which holds navigation buttons.
+     */
     @FXML
     public VBox containerButtons;
+    /**
+     * Label for displaying warning on invalid input to the patient field.
+     */
     @FXML
     public Label invalidInputPatient;
+    /**
+     * The search field.
+     */
     @FXML
     private TextField search;
-
-    AutoCompletionBinding<Patient> acbp;
-    Patient jacob_smith;
-    Patient isabella_johnson;
-    Patient ethan_williams;
-    Patient emma_jones;
-    Patient michael_brown;
+    /**
+     * ObservableList which holds all data pf the search field.
+     */
     @FXML
     private final ObservableList<Patient> data;
+    private AutoCompletionBinding<Patient> acbp;
 
+    //Patients
+    private Patient jacob_smith;
+    private Patient isabella_johnson;
+    private Patient ethan_williams;
+    private Patient emma_jones;
+    private Patient michael_brown;
 
+    /**
+     * Creates mockup data.
+     */
     @Deprecated
     private void createData() {
         //Patients
@@ -83,7 +97,7 @@ public class HomeController {
 
         Administration a5 = new Administration(405, lisinopril, 10.0, emma_jones);
         Record r5 = new Record(new Date(now.getTime() - 1000 * 60 * 60 * 1), lenny_wilkins, 2.0);
-        Record r5a = new Record(new Date(now.getTime() - 1000), lenny_wilkins, 50.0);
+        Record r5a = new Record(new Date(now.getTime() - 1000), lenny_wilkins, 49.0);
         a5.addRecord(r5);
         a5.addRecord(r5a);
         Administration a6 = new Administration(406, levothyroxine, 10.0, emma_jones);
@@ -119,25 +133,40 @@ public class HomeController {
         ethan_williams.setAdministrations(Arrays.asList(a4));
     }
 
+    /**
+     * Initializes data and calls {@link #createData()}. When this class is created the constructor is being called
+     * before the {@link #initialize()}, therefore data has to be created and assigned either here or when initialized.
+     */
     public HomeController() {
         createData();
         data = FXCollections.observableArrayList(jacob_smith, isabella_johnson, ethan_williams, emma_jones, michael_brown);
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
         initializeSearchField(data);
+        //set warning label invisible.
         invalidInputPatient.setVisible(false);
     }
 
+    /**
+     * Initializes {@link #search}.
+     *
+     * @param list
+     */
     public void initializeSearchField(ObservableList<Patient> list) {
+        //if patient was already selected
         if (Selection.getSelectedPatient() != null) {
             search.setText(Selection.getSelectedPatient().toString());
             containerButtons.setVisible(true);
         }
+        //if there is no data
         if (list.isEmpty()) {
             invalidInputPatient.setVisible(true);
-            search.setPromptText("No patients available at the moment");
+            search.setPromptText(Selection.getLanguage().getString("home.noPatients"));
             TextFields.bindAutoCompletion(search, "");
         } else {
             invalidInputPatient.setVisible(false);
@@ -146,6 +175,11 @@ public class HomeController {
         }
     }
 
+    /**
+     * Action listener for "Select button".
+     *
+     * @param actionEvent
+     */
     public void selectPatient(ActionEvent actionEvent) {
         if (Selection.getSelectedPatient() != null) {
             invalidInputPatient.setVisible(false);
@@ -155,21 +189,45 @@ public class HomeController {
         }
     }
 
+    /**
+     * Action listener for "Logbook" button.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void goToLogbook(ActionEvent actionEvent) throws IOException {
-        FXRouter.goTo("logbook");
+        FXRouter.goTo("logbook", Selection.getLanguage());
     }
 
+    /**
+     * Action listener for "Graphs" button.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void goToGraphs(ActionEvent actionEvent) throws IOException {
-        FXRouter.goTo("graphs");
+        FXRouter.goTo("graphs", Selection.getLanguage());
     }
 
+    /**
+     * Action listener for "Administer" button.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void goToAdminister(ActionEvent actionEvent) throws IOException {
-        FXRouter.goTo("administer");
+        FXRouter.goTo("administer", Selection.getLanguage());
     }
 
+    /**
+     * Action listener for "Logout" button.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void logout(ActionEvent actionEvent) throws IOException {
         Selection.setSelectedPatient(null);
         Selection.setCurrentUser(null);
-        FXRouter.goTo("login");
+        FXRouter.goTo("login", Selection.getLanguage());
     }
 }

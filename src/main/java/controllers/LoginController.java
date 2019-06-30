@@ -22,13 +22,19 @@ import support.Selection;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.ResourceBundle;
 
 public class LoginController {
-
+    /**
+     * Animation duration time in ms.
+     */
     public static final double ANIMATION_TIME = 3000;
-    public String lang;
+    /**
+     * The name of this scene.
+     */
     public static final String NAME = "login";
+    /**
+     * Animation path transition.
+     */
     public PathTransition anim;
 
     @FXML
@@ -37,60 +43,126 @@ public class LoginController {
     public TextField tfPassword;
     @FXML
     public Button back;
-    @FXML
-    public Button langButt;
+    /**
+     * Container which holds available login options.
+     */
     @FXML
     public HBox containerMethods;
+    /**
+     * Container which holds elements for password and username login.
+     */
     @FXML
     public VBox containerPassword;
+    /**
+     * Container which holds elements for fingerprint login.
+     */
     @FXML
     public StackPane containerFingerprint;
+    /**
+     * Container which holds elements for card login.
+     */
     @FXML
     public StackPane containerCard;
+    /**
+     * Big label which tells what to do.
+     */
     @FXML
     public Label masterLabel;
+    /**
+     * Label for displaying dev info.
+     */
     @FXML
     public Label development;
+    /**
+     * Label for displaying invalid username or password warning.
+     */
     @FXML
     public Label invalidUsernameOrPassword;
+    /**
+     * Label for displaying invalid card scan warning.
+     */
+    //TODO never use yet
     @FXML
     public Label invalidCard;
+    /**
+     * Label for displaying no match fingerprint warning.
+     */
+    //TODO never used yet.
     @FXML
     public Label invalidFinger;
+    /**
+     * Red horizontal rectangle.
+     */
     @FXML
     public ImageView scannerF;
+    /**
+     * Red vertical rectangle.
+     */
     @FXML
     public ImageView scannerC;
+    /**
+     * Fingerprint image view.
+     */
     @FXML
     public ImageView fingerPrintPic;
+    /**
+     * Id card image view.
+     */
     @FXML
     public ImageView idPic;
+    /**
+     * Button for switching to Dutch.
+     */
+    @FXML
+    public Button langButtNL;
+    /**
+     * Button for switching to English.
+     */
+    @FXML
+    public Button langButtEN;
 
 
     @FXML
     public void initialize() {
+        //sets default language
+        if (Selection.getCurrentLanguage() == null || Selection.getCurrentLanguage().equalsIgnoreCase("en")) {
+            Selection.setLanguage("en");
+            langButtEN.setVisible(false);
+            langButtNL.setVisible(true);
+        } else {
+            Selection.setLanguage("nl");
+            langButtEN.setVisible(true);
+            langButtNL.setVisible(false);
+        }
         selectMethod();
         invalidUsernameOrPassword.setVisible(false);
     }
 
-
+    /**
+     * Sets items visibility to display "Select method" state.
+     * @param b
+     */
     public void setMethodsContainersVisible(boolean b) {
         containerCard.setVisible(b);
         containerFingerprint.setVisible(b);
         containerPassword.setVisible(b);
     }
 
+    /**
+     * Login action listener.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void login(ActionEvent event) throws IOException {
         if (validUsernameAndPassword()) authorize();
         else handleValidationErrors();
     }
 
-    @FXML
-    public void switchLang() throws IOException {
-        FXRouter.switchLanguage(getLang(), NAME);
-    }
-
+    /**
+     * Handles authorisation.
+     * @throws IOException
+     */
     public void authorize() throws IOException {
         if (authorized()) {
             //TODO set proper user here
@@ -99,66 +171,88 @@ public class LoginController {
         } else handleAuthorisationError();
     }
 
+    /**
+     * Redirects to home.
+     * @throws IOException
+     */
     public void redirect() throws IOException {
-        FXRouter.goTo("home", FXRouter.getBundle(getLang().equalsIgnoreCase("nl") ? "en" : "nl"));
+        FXRouter.goTo("home", Selection.getLanguage());
     }
 
+    /**
+     * Handles failed authorisation.
+     */
     public void handleAuthorisationError() {
         //TODO
     }
 
+    /**
+     * Sets {@link #invalidUsernameOrPassword} to visible.
+     */
     public void handleValidationErrors() {
         invalidUsernameOrPassword.setVisible(true);
     }
 
     /**
-     * @return {@code true} if {@link #tfUsername} and {@link #tfPassword} are not {@code null} and not empty.
+     * @return {@code true} if fields are not empty.
      */
     public boolean validUsernameAndPassword() {
-        //TODO
-//        return (tfUsername.getText() != null && tfPassword.getText() != null) &&
-//                !(tfUsername.getText().isEmpty() && tfPassword.getText().isEmpty());
-        return true;
+        return (tfUsername.getText() != null && tfPassword.getText() != null) &&
+                !(tfUsername.getText().isEmpty() && tfPassword.getText().isEmpty());
     }
 
+    /**
+     * @return {@code true} if fingerprint match was found, otherwise {@code false}.
+     */
     public boolean validFinger() {
+        //TODO implement finger print scanning
         return false;
     }
 
+    /**
+     * @return {@code true} if successfully authorised, otherwise {@code false}.
+     */
     public boolean authorized() {
-        //TODO: proper login
+        //TODO compare username and password to db, if match true
         return true;
     }
 
-    @Deprecated
-    public String getLang() {
-        lang = langButt.getText();
-        lang = lang.substring(lang.length() - 2);
-        return lang;
-    }
-
-
+    /**
+     * The "Select method" state. Sets items visibility and labels text according to the needed state.
+     */
     public void selectMethod() {
         development.setVisible(false);
-        masterLabel.setText(ResourceBundle.getBundle(FXRouter.getCurrentBundleName()).getString("login.select"));
+        masterLabel.setText(Selection.getLanguage().getString("login.select"));
         setMethodsContainersVisible(false);
         containerMethods.setVisible(true);
         back.setVisible(false);
     }
 
+    /**
+     * Sets labels and visibility of items to display username and password method.
+     *
+     * @param actionEvent
+     */
     @FXML
     public void renderTextFields(ActionEvent actionEvent) {
         containerMethods.setVisible(false);
-        masterLabel.setText(ResourceBundle.getBundle(FXRouter.getCurrentBundleName()).getString("login.method.password"));
+        masterLabel.setText(Selection.getLanguage().getString("login.method.password"));
         setMethodsContainersVisible(false);
         containerPassword.setVisible(true);
         back.setVisible(true);
     }
 
+    /**
+     * Sets labels and visibility of items to display fingerprint method, plays animation.
+     *
+     * @param mouseEvent
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     public void selectToScanFinger(MouseEvent mouseEvent) throws IOException, InterruptedException {
         containerMethods.setVisible(false);
-        masterLabel.setText(ResourceBundle.getBundle(FXRouter.getCurrentBundleName()).getString("login.method.fingerprint"));
+        masterLabel.setText(Selection.getLanguage().getString("login.method.fingerprint"));
         setMethodsContainersVisible(false);
         containerFingerprint.setVisible(true);
         back.setVisible(true);
@@ -167,6 +261,81 @@ public class LoginController {
     }
 
 
+    /**
+     * Action listener for "Scan fingerprint" button.
+     *
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    @FXML
+    public void scanFinger() throws IOException, InterruptedException {
+        development.setText(Selection.getLanguage().getString("login.devFinger"));
+        development.setVisible(true);
+        //TODO actually scan a finger and compare it to the db values
+        if (validFinger()) authorize();
+        else handleAuthorisationError();
+    }
+
+    /**
+     * Action listener for "Scan card" button.
+     *
+     * @param actionEvent
+     */
+    @FXML
+    public void scanCard(ActionEvent actionEvent) {
+        development.setText(Selection.getLanguage().getString("login.devCard"));
+        development.setVisible(true);
+        containerMethods.setVisible(false);
+        masterLabel.setText(Selection.getLanguage().getString("login.method.card"));
+        setMethodsContainersVisible(false);
+        containerCard.setVisible(true);
+        back.setVisible(true);
+        animateScannerH();
+    }
+
+    /**
+     * Action listener for "Back" button.
+     *
+     * @param actionEvent
+     */
+    @FXML
+    public void goBack(ActionEvent actionEvent) {
+        selectMethod();
+    }
+
+    /**
+     * Action listener for language switch.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void switchToEN(ActionEvent actionEvent) throws IOException {
+        Selection.setLanguage("en");
+        FXRouter.switchLanguage(Selection.getLanguage(), NAME);
+        langButtEN.setVisible(false);
+        langButtNL.setVisible(true);
+    }
+
+    /**
+     * Action listener for language switch.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void switchToNL(ActionEvent actionEvent) throws IOException {
+        Selection.setLanguage("nl");
+        FXRouter.switchLanguage(Selection.getLanguage(), NAME);
+        langButtEN.setVisible(true);
+        langButtNL.setVisible(false);
+    }
+
+    /**
+     * Returns vertical path for finger animation.
+     *
+     * @param x
+     * @param y
+     * @return vertical path for finger animation.
+     */
     public PathElement[] getVPath(double x, double y) {
         x = (x + (scannerF.getFitWidth() / 2));
         PathElement[] path = {
@@ -178,6 +347,13 @@ public class LoginController {
         return path;
     }
 
+    /**
+     * Returns horizontal path for card animation.
+     *
+     * @param x
+     * @param y
+     * @return horizontal path for card animation.
+     */
     public PathElement[] getHPath(double x, double y) {
         y = y + scannerC.getFitHeight() / 2;
         PathElement[] path = {
@@ -189,14 +365,26 @@ public class LoginController {
         return path;
     }
 
+    /**
+     * Animates horizontal scanner.
+     */
     public void animateScannerH() {
         animateScanner(scannerC, getHPath(scannerC.getX(), scannerC.getY()));
     }
 
+    /**
+     * Animates vertical scanner.
+     */
     public void animateScannerV() {
         animateScanner(scannerF, getVPath(scannerF.getX(), scannerF.getY()));
     }
 
+    /**
+     * Animates scanner.
+     *
+     * @param scanner
+     * @param path
+     */
     public void animateScanner(ImageView scanner, PathElement[] path) {
         Path road = new Path();
         road.getElements().addAll(path);
@@ -208,31 +396,4 @@ public class LoginController {
         anim.setCycleCount(Timeline.INDEFINITE);
         anim.play();
     }
-
-    @FXML
-    public void scanFinger() throws IOException, InterruptedException {
-        development.setText("Development: Finger scan function is not implemented yet.");
-        development.setVisible(true);
-        //TODO actually scan a finger and compare it to the db values
-        if (validFinger()) authorize();
-        else handleAuthorisationError();
-    }
-
-    @FXML
-    public void scanCard(ActionEvent actionEvent) {
-        development.setText("Development: Card scan function is not implemented yet.");
-        development.setVisible(true);
-        containerMethods.setVisible(false);
-        masterLabel.setText(ResourceBundle.getBundle(FXRouter.getCurrentBundleName()).getString("login.method.card"));
-        setMethodsContainersVisible(false);
-        containerCard.setVisible(true);
-        back.setVisible(true);
-        animateScannerH();
-    }
-
-    @FXML
-    public void goBack(ActionEvent actionEvent) {
-        selectMethod();
-    }
-
 }

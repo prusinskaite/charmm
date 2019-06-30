@@ -13,7 +13,7 @@
                 <Label text="%home.selectPatient" styleClass="normalLabel"/>
                 <HBox>
                     <TextField fx:id="search" maxHeight="30.0" maxWidth="-Infinity" minHeight="30.0" prefHeight="30.0"
-                               prefWidth="369.0" promptText="Enter patient name or ID" styleClass="text-area">
+                               prefWidth="369.0" promptText="%home.enterPatient" styleClass="text-area">
                         <VBox.margin>
                             <Insets top="10.0"/>
                         </VBox.margin>
@@ -27,20 +27,20 @@
                 <VBox fx:id="containerButtons" visible="false">
                     <Button alignment="CENTER" contentDisplay="CENTER" minHeight="0.0" minWidth="200.0"
                             mnemonicParsing="false" onAction="#goToGraphs" prefWidth="200.0" styleClass="button"
-                            text="Graphs">
+                            text="%home.graphs">
                         <VBox.margin>
                             <Insets bottom="15.0" top="15.0"/>
                         </VBox.margin>
                     </Button>
                     <Button alignment="CENTER" contentDisplay="CENTER" minHeight="0.0" minWidth="200.0"
                             mnemonicParsing="false" onAction="#goToLogbook" prefWidth="200.0" styleClass="button"
-                            text="Logbook">
+                            text="%home.logbook">
                         <VBox.margin>
                             <Insets bottom="15.0" top="15.0"/>
                         </VBox.margin>
                     </Button>
                     <Button alignment="CENTER" contentDisplay="CENTER" minWidth="200.0" mnemonicParsing="false"
-                            onAction="#goToAdminister" prefWidth="200.0" styleClass="button" text="Administer">
+                            onAction="#goToAdminister" prefWidth="200.0" styleClass="button" text="%home.administer">
                         <VBox.margin>
                             <Insets bottom="15.0" top="15.0"/>
                         </VBox.margin>

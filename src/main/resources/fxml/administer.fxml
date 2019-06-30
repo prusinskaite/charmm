@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
-      fx:controller="controllers.AdministrerController"
+      fx:controller="controllers.AdministerController"
       prefWidth="1000" prefHeight="700"
       stylesheets="/css/login.css">
     <Button fx:id="back" onAction="#goBack" styleClass="back" text="%login.back"/>
     <Label fx:id="patientLabel" layoutX="20.0" layoutY="41.0" styleClass="bigLabel"/>
     <TableView fx:id="administerTable" layoutX="44.0" layoutY="44.0" editable="true" >
         <columns>
-            <TableColumn fx:id="columnMedicine" text="Medicine"/>
-            <TableColumn fx:id="columnOldDosage" text="Old Dosage"/>
-            <TableColumn fx:id="columnNewDosage" text="New Dosage">
+            <TableColumn fx:id="columnMedicine" text="%administer.medicine"/>
+            <TableColumn fx:id="columnOldDosage" text="%administer.oldDosage"/>
+            <TableColumn fx:id="columnNewDosage" text="%administer.newDosage">
                 <cellValueFactory>
                     <PropertyValueFactory property="newDosage"/>
                 </cellValueFactory>

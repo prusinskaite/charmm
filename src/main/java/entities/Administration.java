@@ -48,4 +48,20 @@ public class Administration extends BaseEntity {
     public void setConcentration(Double concentration) {
         this.concentration = concentration;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public List<Record> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<Record> records) {
+        this.records = records;
+    }
 }
