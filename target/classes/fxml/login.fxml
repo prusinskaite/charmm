@@ -1,124 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<VBox xmlns:b="http://getbootstrap.com/components" xmlns:fx="http://javafx.com/fxml/1" prefWidth="1000" prefHeight="700"
+      alignment="CENTER"
+      styleClass="pane" stylesheets="/css/login.css"
+      xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="controllers.LoginController">
 
-<VBox prefWidth="1000" prefHeight="700" alignment="CENTER" styleClass="pane" stylesheets="/css/login.css" xmlns:b="http://getbootstrap.com/components" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
-    <Button fx:id="back" onAction="#goBack" styleClass="back" text="%login.back" />
-    <Label fx:id="masterLabel" alignment="TOP_CENTER" contentDisplay="CENTER" styleClass="bigLabel" text="%login.select" />
-    <ToolBar prefHeight="40.0" prefWidth="200.0" visible="false">
-        <items>
-            <Button fx:id="langButt" onAction="#switchLang" text="%switch" visible="false" />
-        </items>
-    </ToolBar>
+    <Button fx:id="back" onAction="#goBack" styleClass="back" text="%login.back"/>
+
+
+    <Label fx:id="masterLabel" alignment="TOP_CENTER" contentDisplay="CENTER" styleClass="bigLabel"
+           text="%login.select"/>
 
     <StackPane prefHeight="150.0" prefWidth="200.0">
-        <HBox fx:id="containerMethods" alignment="CENTER" layoutX="350.0" layoutY="166.0" prefHeight="318.0" prefWidth="301.0">
-            <Button fx:id="methodPassword" alignment="CENTER" contentDisplay="CENTER" minHeight="200" minWidth="200" onAction="#renderTextFields" styleClass="methodPassword">
+        <HBox fx:id="containerMethods" alignment="CENTER" layoutX="350.0" layoutY="166.0" prefHeight="318.0"
+              prefWidth="301.0">
+            <Button fx:id="methodPassword" alignment="CENTER" contentDisplay="CENTER" minHeight="200" minWidth="200"
+                    onAction="#renderTextFields" styleClass="methodPassword">
                 <opaqueInsets>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </opaqueInsets>
                 <HBox.margin>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </HBox.margin>
             </Button>
-            <Button fx:id="methodFingerprint" minHeight="200" minWidth="200" onMousePressed="#selectToScanFinger" styleClass="methodFingerprint">
+            <Button fx:id="methodFingerprint" minHeight="200" minWidth="200" onMousePressed="#selectToScanFinger"
+                    styleClass="methodFingerprint">
                 <opaqueInsets>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </opaqueInsets>
                 <HBox.margin>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </HBox.margin>
             </Button>
             <Button fx:id="methodCard" minHeight="200" minWidth="200" onAction="#scanCard" styleClass="methodCard">
                 <opaqueInsets>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </opaqueInsets>
                 <HBox.margin>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </HBox.margin>
             </Button>
-         <opaqueInsets>
-            <Insets left="100.0" top="100.0" />
-         </opaqueInsets>
+            <opaqueInsets>
+                <Insets left="100.0" top="100.0"/>
+            </opaqueInsets>
         </HBox>
         <VBox fx:id="containerPassword" layoutX="350.0" layoutY="166.0" prefHeight="318.0" prefWidth="301.0">
 
-            <TextField fx:id="tfUsername" layoutX="300" layoutY="230" minHeight="30" prefHeight="40.0" promptText="%login.username" styleClass="usrn">
+            <TextField fx:id="tfUsername" layoutX="300" layoutY="230" minHeight="30" prefHeight="40.0"
+                       promptText="%login.username" styleClass="usrn">
                 <padding>
-                    <Insets left="30.0" />
+                    <Insets left="30.0"/>
                 </padding>
                 <font>
-                    <Font size="14.0" />
+                    <Font size="14.0"/>
                 </font>
                 <VBox.margin>
-                    <Insets top="24.0" />
+                    <Insets top="24.0"/>
                 </VBox.margin>
             </TextField>
-            <PasswordField fx:id="tfPassword" minHeight="30" prefHeight="40.0" promptText="%login.password" styleClass="pswd">
+            <PasswordField fx:id="tfPassword" minHeight="30" prefHeight="40.0" promptText="%login.password"
+                           styleClass="pswd">
                 <padding>
-                    <Insets left="30.0" />
+                    <Insets left="30.0"/>
                 </padding>
                 <font>
-                    <Font size="14.0" />
+                    <Font size="14.0"/>
                 </font>
                 <VBox.margin>
-                    <Insets top="12.0" />
+                    <Insets top="12.0"/>
                 </VBox.margin>
             </PasswordField>
-            <Label fx:id="invalidUsernameOrPassword" layoutX="406.0" layoutY="362.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="200.0" styleClass="errorLabel" text="%login.invalidCredentials">
+            <Label fx:id="invalidUsernameOrPassword" layoutX="406.0" layoutY="362.0" maxHeight="1.7976931348623157E308"
+                   maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="200.0" styleClass="errorLabel"
+                   text="%login.invalidCredentials">
             </Label>
 
-            <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" layoutX="350" layoutY="320" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" text="%login.login" textAlignment="CENTER">
+            <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" layoutX="350" layoutY="320"
+                    maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" text="%login.login"
+                    textAlignment="CENTER">
                 <VBox.margin>
-                    <Insets left="40.0" right="40.0" top="50.0" />
+                    <Insets left="40.0" right="40.0" top="50.0"/>
                 </VBox.margin>
                 <font>
-                    <Font name="System Bold" size="14.0" />
+                    <Font name="System Bold" size="14.0"/>
                 </font>
             </Button>
             <padding>
-                <Insets bottom="30.0" left="300.0" right="300.0" />
+                <Insets bottom="30.0" left="300.0" right="300.0"/>
             </padding>
-         <opaqueInsets>
-            <Insets left="150.0" right="150.0" />
-         </opaqueInsets>
+            <opaqueInsets>
+                <Insets left="150.0" right="150.0"/>
+            </opaqueInsets>
         </VBox>
-        <StackPane fx:id="containerFingerprint" alignment="CENTER" layoutX="350.0" layoutY="166.0" prefHeight="318.0" prefWidth="301.0">
+        <StackPane fx:id="containerFingerprint" alignment="CENTER" layoutX="350.0" layoutY="166.0" prefHeight="318.0"
+                   prefWidth="301.0">
             <ImageView fx:id="fingerPrintPic" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../images/fingerprints.png" />
+                    <Image url="@../images/fingerprints.png"/>
                 </image>
             </ImageView>
             <ImageView fx:id="scannerF" fitHeight="20" fitWidth="200" opacity="0.85" pickOnBounds="true">
                 <image>
-                    <Image requestedHeight="50" requestedWidth="100" url="@../images/redBar.png" />
+                    <Image requestedHeight="50" requestedWidth="100" url="@../images/redBar.png"/>
                 </image>
             </ImageView>
         </StackPane>
-        <StackPane fx:id="containerCard" alignment="CENTER" layoutX="350.0" layoutY="166.0" prefHeight="318.0" prefWidth="301.0">
+        <StackPane fx:id="containerCard" alignment="CENTER" layoutX="350.0" layoutY="166.0" prefHeight="318.0"
+                   prefWidth="301.0">
             <ImageView fx:id="idPic" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../images/id-card.png" />
+                    <Image url="@../images/id-card.png"/>
                 </image>
             </ImageView>
             <ImageView fx:id="scannerC" fitHeight="200" fitWidth="20" opacity="0.85" pickOnBounds="true">
                 <image>
-                    <Image requestedHeight="100" requestedWidth="50" url="@../images/redBar.png" />
+                    <Image requestedHeight="100" requestedWidth="50" url="@../images/redBar.png"/>
                 </image>
             </ImageView>
         </StackPane>
     </StackPane>
-    <Label fx:id="development" styleClass="devLabel" stylesheets="devLabel" />
-
+    <Label fx:id="development" styleClass="devLabel" stylesheets="devLabel"/>
+    <StackPane>
+        <Button fx:id="langButtEN" onAction="#switchToEN" text="%switchToEN"/>
+        <Button fx:id="langButtNL" onAction="#switchToNL" text="%switchToNL"/>
+    </StackPane>
 </VBox>

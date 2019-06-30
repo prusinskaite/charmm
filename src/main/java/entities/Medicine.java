@@ -3,20 +3,15 @@ package entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Medicine {
-    private long id;
+public class Medicine extends BaseEntity {
+
     private final StringProperty name;
     private String notes;
 
     public Medicine(long id, String name) {
-        this.id = id;
+        super(id);
         this.name = new SimpleStringProperty(name);
     }
-
-    public long getId() {
-        return id;
-    }
-
 
     public StringProperty nameProperty() {
         return name;

@@ -61,11 +61,6 @@ public final class FXRouter {
     private static AbstractMap<String, RouteScene> routes = new HashMap<>();
     // FXRouter current route
     private static RouteScene currentRoute;
-    private static ResourceBundle currentBundle = ResourceBundle.getBundle("locales.messages");
-
-    public static String getCurrentBundleName() {
-        return currentBundle.getBaseBundleName();
-    }
 
     /**
      * FXRouter Inner Class used into routes map
@@ -202,10 +197,10 @@ public final class FXRouter {
         routes.put(routeLabel, routeScene);
     }
 
-    public static void goTo(String routeLabel) throws IOException {
+    public static void goTo(String routeLabel, ResourceBundle resourceBundle) throws IOException {
         // get corresponding route
         RouteScene route = routes.get(routeLabel);
-        loadNewRoute(route);
+        loadNewRoute(resourceBundle, route);
     }
 
     /**
@@ -215,22 +210,19 @@ public final class FXRouter {
      * @param data:       Data passed to route
      * @throws Exception: throw FXMLLoader exception if file is not loaded correctly
      */
-    public static void goTo(String routeLabel, Object data) throws IOException {
+    public static void goTo(String routeLabel, Object data, ResourceBundle resourceBundle) throws IOException {
         // get corresponding route
         RouteScene route = routes.get(routeLabel);
         // set route data
         route.data = data;
-        loadNewRoute(route);
+        loadNewRoute(resourceBundle, route);
     }
 
     /**
-     * nl or base/en
-     *
-     * @param abbreviation
      * @throws IOException
      */
-    public static void switchLanguage(String abbreviation, String routeLabel) throws IOException {
-        goTo(routeLabel);
+    public static void switchLanguage(ResourceBundle resourceBundle, String routeLabel) throws IOException {
+        goTo(routeLabel, resourceBundle);
     }
 
     public static ResourceBundle getBundle(String language) {
@@ -246,7 +238,7 @@ public final class FXRouter {
      *
      * @throws Exception: throw FXMLLoader exception if file is not loaded correctly
      */
-    private static void loadNewRoute(RouteScene route) throws IOException {
+    private static void loadNewRoute(ResourceBundle resourceBundle, RouteScene route) throws IOException {
         // get Main Class package name to get correct files path
         String pathRef = mainRef.getClass().getPackage().getName();
 
@@ -259,7 +251,7 @@ public final class FXRouter {
         // load .fxml resource
         //TODO load a bundle name from the db
         Parent resource = FXMLLoader.load(new Object() {
-        }.getClass().getResource(scenePath), ResourceBundle.getBundle("locales.messages"));
+        }.getClass().getResource(scenePath), resourceBundle);
         // }.getClass().getResource(scenePath), bundle);
         // set window title from route settings or default setting
         window.setTitle(route.windowTitle);
@@ -273,12 +265,12 @@ public final class FXRouter {
     }
 
     /* Syntactic sugar for goTo() method when FXRouter get set */
-    public static void startFrom(String routeLabel) throws Exception {
-        goTo(routeLabel);
+    public static void startFrom(String routeLabel, ResourceBundle resourceBundle) throws Exception {
+        goTo(routeLabel, resourceBundle);
     }
 
-    public static void startFrom(String routeLabel, Object data) throws Exception {
-        goTo(routeLabel, data);
+    public static void startFrom(String routeLabel, Object data, ResourceBundle resourceBundle) throws Exception {
+        goTo(routeLabel, data, resourceBundle);
     }
 
     /**

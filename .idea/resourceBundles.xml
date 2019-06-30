@@ -3,5 +3,10 @@
   <component name="ResourceBundleManager">
     <file url="file://$PROJECT_DIR$/src/main/resources/locales/messages.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/locales/messages_nl.properties" />
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/locales/messages.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/locales/messages_nl.properties" />
+      <base-name>messages</base-name>
+    </custom-resource-bundle>
   </component>
 </project>

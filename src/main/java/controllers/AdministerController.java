@@ -18,20 +18,47 @@ import support.Selection;
 import java.io.IOException;
 import java.util.Date;
 
-public class AdministrerController {
+public class AdministerController {
+
+    /**
+     * Label to display Patient info.
+     */
     @FXML
     public Label patientLabel;
+    /**
+     * Table which holds administrations and the last record.
+     */
     @FXML
     private TableView<Administration> administerTable;
+    /**
+     * Medicine column.
+     */
     @FXML
     private TableColumn<Administration, String> columnMedicine;
+    /**
+     * Latest record dosage column.
+     */
     @FXML
     private TableColumn<Administration, String> columnOldDosage;
+    /**
+     * Editable new dosage column.
+     */
     @FXML
     private TableColumn<Administration, String> columnNewDosage;
-
+    /**
+     * ObservableList which holds all the data which is used in the table.
+     */
     private ObservableList<Administration> masterData = FXCollections.observableArrayList();
+    /**
+     * Mockup safe dosage limit. Must be removed when real safe limits can be calculated.
+     */
+    @Deprecated
+    private Double safeLimit = 50.0;
 
+    /**
+     * Initializes the view. Sets data for {@link #patientLabel}, {@link #masterData}, {@link #columnMedicine},
+     * {@link #columnOldDosage}; creates Callback, sets {@link #columnNewDosage} functionality/
+     */
     @FXML
     public void initialize() {
         patientLabel.setText(Selection.getSelectedPatient().toString());
@@ -59,10 +86,21 @@ public class AdministrerController {
         administerTable.setItems(masterData);
     }
 
+    /**
+     * Action listener for "Back" button. Loads home page.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void goBack(ActionEvent actionEvent) throws IOException {
-        FXRouter.goTo("home");
+        FXRouter.goTo("home", Selection.getLanguage());
     }
 
+    /**
+     * Action listener for "Submit" button. Creates and shows alert message.
+     *
+     * @param actionEvent
+     */
     public void submit(ActionEvent actionEvent) {
         Alert saved = new Alert(Alert.AlertType.ERROR);
         saved.setHeaderText("New dosage has been administered.");
@@ -70,10 +108,18 @@ public class AdministrerController {
         saved.showAndWait();
     }
 
+    /**
+     * Custom editable cell class.
+     */
     class EditingCell extends TableCell<Administration, String> {
-
+        /**
+         * Editable text field.
+         */
         private TextField textField;
 
+        /**
+         * Default constructor.
+         */
         public EditingCell() {
         }
 
@@ -91,7 +137,6 @@ public class AdministrerController {
         @Override
         public void cancelEdit() {
             super.cancelEdit();
-
             setText(String.valueOf(getItem()));
             setContentDisplay(ContentDisplay.TEXT_ONLY);
         }
@@ -116,6 +161,9 @@ public class AdministrerController {
             }
         }
 
+        /**
+         * Creates text field, sets onKeyPressed, adds listener.
+         */
         private void createTextField() {
             textField = new TextField(getString());
             textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
@@ -132,12 +180,12 @@ public class AdministrerController {
                     if (newValue != null &&
                             !newValue.isEmpty() &&
                             newValue.matches("\\d{0,7}([\\.]\\d{0,4})?") &&
-                            Double.valueOf(newValue).compareTo(50.0) >= 0) {
+                            //if value is more than safe limit
+                            Double.valueOf(newValue).compareTo(safeLimit) >= 0) {
                         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                         errorAlert.setHeaderText("Dangerous dosage!");
-                        errorAlert.setContentText("The safe dosage limit \"" + 50.0 + "\" has been exceeded.");
+                        errorAlert.setContentText("The safe dosage limit \"" + safeLimit + "\" has been exceeded.");
                         errorAlert.showAndWait();
-                        //textField.clear();
                     }
                 }
             });

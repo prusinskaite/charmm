@@ -6,35 +6,40 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import support.FXRouter;
 import support.Selection;
-
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TimeZone;
 
 public class LogbookController {
+    /**
+     * The container of all sliders.
+     */
     @FXML
     public VBox sliderContainer;
+    /**
+     * Label for displaying patient info.
+     */
     @FXML
     public Label patientLabel;
-    @FXML
-    private Map<Label, Slider> sliders = new HashMap<>();
 
+    /**
+     * Generates sliders with labels for each administration of the currently selected patient.
+     */
     @FXML
     public void initialize() {
         patientLabel.setText(Selection.getSelectedPatient().toString());
         for (int i = 0; i < Selection.getSelectedPatient().getAdministrations().size(); i++) {
             Administration administration = Selection.getSelectedPatient().getAdministrations().get(i);
+            //sets max to the time of administration + 2 hours (10800000 ms). This has to be a calculated value.
+            //TODO
             Slider slider = new Slider(administration.getLatestRecord().getTime().getTime(), administration.getLatestRecord().getTime().getTime() + 10800000, System.currentTimeMillis());
             slider.setMajorTickUnit(450);
             slider.setShowTickLabels(true);
@@ -65,10 +70,12 @@ public class LogbookController {
             Text text = new Text();
             slider.valueProperty().addListener((observable, oldValue, newValue) ->
                     text.setText(stringConverter.toString(newValue.doubleValue())));
-            Label medecine = new Label("Medicine: " + administration.getMedicine().getName() + "\n");
-            Label prescriber = new Label("Prescriber: " + administration.getLatestRecord().getPrescriber().toString() + "\n");
-            HBox labels = new HBox(medecine, prescriber);
-            medecine.setPadding(new Insets(10, 10, 10, 10));
+            Label medicine = new Label(Selection.getLanguage().getString("logbook.medicine") + administration.getMedicine().getName() + ", " +
+                    administration.getConcentration() + " mol/m³" + "\n");
+            Label prescriber = new Label(Selection.getLanguage().getString("logbook.prescriber") +
+                    administration.getLatestRecord().getPrescriber().getFullName() + "\n");
+            HBox labels = new HBox(medicine, prescriber);
+            medicine.setPadding(new Insets(10, 10, 10, 10));
             prescriber.setPadding(new Insets(10, 10, 10, 10));
             VBox vBox = new VBox(labels, slider);
             sliderContainer.getChildren().add(vBox);
@@ -76,14 +83,14 @@ public class LogbookController {
         }
     }
 
-    private Slider createSlider(Double value) {
-        Slider slider = new Slider();
-        slider.setValue(value);
-        return slider;
-    }
-
+    /**
+     * Action listener for "Back" button.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void goBack(ActionEvent actionEvent) throws IOException {
-        FXRouter.goTo("home");
+        FXRouter.goTo("home", Selection.getLanguage());
     }
 
 }
